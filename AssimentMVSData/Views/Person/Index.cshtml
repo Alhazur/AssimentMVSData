@@ -1,0 +1,41 @@
+﻿    @model List<Person>
+    @{
+        ViewData["Title"] = "Person Index";
+    }
+
+    <h1>Person List</h1>
+
+    <form method="post">
+        <input type="text" name="name" value="" placeholder="Name"/>
+        <input type="tel" name="phone" value="" placeholder="Telephone"/>
+        <input type="text" name="city" value="" placeholder="City"/>
+        <input type="submit" value="Create" />
+        
+    </form>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>City</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Phone</td>
+            <td>@item.City</td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="Id" value="@item.Id" />
+                    <input type="submit" name="Id" value="Delete" />
+                </form>
+            </td>
+
+        </tr>
+
+        }
+        
+    </table>

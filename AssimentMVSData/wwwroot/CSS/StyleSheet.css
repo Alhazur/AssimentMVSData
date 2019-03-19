@@ -1,0 +1,26 @@
+﻿body {
+    background-image: url("http://img2.vetton.ru//upl/1000/660/vetton_ru_hamann-porsche-panamera-widebodykit-04-1920x1080.jpg");
+    padding: 10px;
+}
+
+ul > li > a {
+    margin-right: 15px;
+}
+
+header > nav > a {
+    font-size: 40px;
+    margin-right: 25px;
+}
+
+.container {
+    background-color: azure;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 4px;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
