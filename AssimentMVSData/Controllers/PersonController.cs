@@ -22,18 +22,30 @@ namespace AssimentMVSData.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int? id, string name, int phone, string city)
+        public IActionResult Index(string name, int phone, string city)
+        {
+
+            _personService.CreatePerson(name, phone, city);
+
+
+            return View(_personService.AllPersons());
+        }
+
+        [HttpPost]
+        public IActionResult DelPerson(int? id)
         {
             if (id != null)
             {
                 _personService.DeletePerson((int)id);
             }
-            else
-            {
-                _personService.CreatePerson(name, phone, city);
-            }
 
-            return View(_personService.AllPersons());
+            //return View("Index",_personService.AllPersons());
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Person(int id)
+        {
+            return PartialView("_Person", _personService.FindPerson(id));
         }
     }
 }

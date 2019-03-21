@@ -1,19 +1,29 @@
-﻿    @model List<Person>
-    @{
-        ViewData["Title"] = "Person Index";
-    }
+﻿@model List<Person>
+@{
+    ViewData["Title"] = "Person Index";
+}
 
-    <h1>Person List</h1>
+<h1>Person List</h1>
 
-    <form method="post">
-        <input type="text" name="name" value="" placeholder="Name"/>
-        <input type="tel" name="phone" value="" placeholder="Telephone"/>
-        <input type="text" name="city" value="" placeholder="City"/>
-        <input type="submit" value="Create" />
-        
-    </form>
+<form asp-controller="Person" asp-action="Index" method="post">
+    <input type="text" name="name" value="" placeholder="Name" />
+    <input type="tel" name="phone" value="" placeholder="Telephone" />
+    <input type="text" name="city" value="" placeholder="City" />
+    <input type="submit" value="Create" />
 
-    <table>
+</form>
+<div>
+    <ul>
+        @foreach (var item in Model)
+        {
+            @await Html.PartialAsync("_Person", item)
+            @await Html.PartialAsync("_DelPerson", item)
+        }
+
+    </ul>
+</div>
+
+@*<table>
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -37,5 +47,5 @@
         </tr>
 
         }
-        
-    </table>
+
+    </table>*@

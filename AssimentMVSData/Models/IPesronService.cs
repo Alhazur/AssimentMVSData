@@ -13,7 +13,6 @@ namespace AssimentMVSData.Models
 
         Person FindPerson(int id);
 
-
         List<Person> DeletePerson(int id);
     }
 }
