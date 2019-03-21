@@ -1,6 +1,24 @@
 ﻿@model Person
 
-<li>
-    @Model.Id    @Model.Name    @Model.Phone    @Model.City   
-</li>
+@*<li>
+    @Model.Id    @Model.Name    @Model.Phone    @Model.City
+</li>*@
 
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Telephone</th>
+        <th>City</th>
+    </tr>
+
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Name</td>
+        <td>@Model.Phone</td>
+        <td>@Model.City</td>
+    </tr>
+
+
+
+</table>

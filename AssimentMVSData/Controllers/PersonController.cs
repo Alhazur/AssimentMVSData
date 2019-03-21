@@ -42,8 +42,8 @@ namespace AssimentMVSData.Controllers
             //return View("Index",_personService.AllPersons());
             return RedirectToAction("Index");
         }
-
-        public IActionResult Person(int id)
+         
+        public IActionResult Person(int id) 
         {
             return PartialView("_Person", _personService.FindPerson(id));
         }

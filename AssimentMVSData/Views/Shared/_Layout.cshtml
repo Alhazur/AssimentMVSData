@@ -11,6 +11,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <link href="~/CSS/StyleSheet.css" rel="stylesheet" />
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -40,9 +42,22 @@
     <div>
         @RenderBody()
     </div>
-
+    <div>
+        <a id="aUpdate" asp-controller="Person" asp-action="Person" asp-route-id="0" data-target="environment-container"> Update</a>
+        <div id="environment-container"></div> @*ajax smotret data-target*@
+    </div>
     <footer>
         <p>Made by: Alhazur &copy; @DateTime.Now.ToString("yyyy")</p>
     </footer>
+    <script>
+    //Jquery
+        $("#aUpdate").click(function (e) {
+            e.preventDefault();
+            var _this = $(this);
+            $.get(_this.attr("href"), function (res) {
+                $('#' + _this.data("target")).html(res);
+            });
+        });
+    </script>
 </body>
 </html>

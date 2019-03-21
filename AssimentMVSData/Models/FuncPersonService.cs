@@ -10,6 +10,11 @@ namespace AssimentMVSData.Models
         private List<Person> persons = new List<Person>();
         private int idCount = 1;
 
+        public FuncPersonService()
+        {
+            persons.Add(new Person() { Name = "Max", Phone = 0729998877, City = "London" });
+        }
+
         public List<Person> AllPersons()
         {
             return persons;
