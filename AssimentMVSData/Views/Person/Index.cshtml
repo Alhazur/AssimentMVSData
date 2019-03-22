@@ -17,35 +17,8 @@
         @foreach (var item in Model)
         {
             @await Html.PartialAsync("_Person", item)
-            @await Html.PartialAsync("_DelPerson", item)
+            @await Html.PartialAsync("_Edit", item)
         }
 
     </ul>
-</div>
-
-@*<table>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Telephone</th>
-            <th>City</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Phone</td>
-            <td>@item.City</td>
-            <td>
-                <form method="post">
-                    <input type="hidden" name="Id" value="@item.Id" />
-                    <input type="submit" name="Id" value="Delete" />
-                </form>
-            </td>
-
-        </tr>
-
-        }
-
-    </table>*@
+</div

@@ -42,10 +42,37 @@ namespace AssimentMVSData.Controllers
             //return View("Index",_personService.AllPersons());
             return RedirectToAction("Index");
         }
-         
-        public IActionResult Person(int id) 
+
+        public IActionResult Person(int id)//ett som vissas genom ajax
         {
             return PartialView("_Person", _personService.FindPerson(id));
+        }
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var person = _personService.FindPerson((int)id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_Edit", person);
+        }
+
+        [HttpPost]
+        public IActionResult Edit([Bind("Id, Name, Phone, City")] Person person)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _personService.UpdatePerson(person);
+                return RedirectToAction(nameof(Index));
+            }
+            return PartialView("_Edit", person);
         }
     }
 }

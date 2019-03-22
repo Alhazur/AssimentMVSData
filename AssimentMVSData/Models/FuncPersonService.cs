@@ -30,8 +30,6 @@ namespace AssimentMVSData.Models
 
         public List<Person> DeletePerson(int id)//för ta bort måste sktiva list istället annat namn
         {
-            
-
             foreach (Person item in persons)
             {
                 if (item.Id == id)
@@ -40,7 +38,6 @@ namespace AssimentMVSData.Models
                     break;
                 }
             }
-
             return persons;
         }
 
@@ -53,8 +50,22 @@ namespace AssimentMVSData.Models
                     return item;
                 }
             }
-
             return null;
+        }
+
+        public bool UpdatePerson(Person person)//måste finnas update method att byta namn
+        {
+            foreach (Person item in persons)
+            {
+                if (item.Id == person.Id)
+                {
+                    item.Name = person.Name;
+                    item.Phone = person.Phone;
+                    item.City = person.City;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
