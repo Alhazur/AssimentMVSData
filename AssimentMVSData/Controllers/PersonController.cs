@@ -31,7 +31,7 @@ namespace AssimentMVSData.Controllers
             return View(_personService.AllPersons());
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult DelPerson(int? id)
         {
             if (id != null)
@@ -39,11 +39,12 @@ namespace AssimentMVSData.Controllers
                 _personService.DeletePerson((int)id);
             }
 
+            return Content("");
             //return View("Index",_personService.AllPersons());
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
-        public IActionResult Person(int id)//ett som vissas genom ajax
+        public IActionResult Person(int id)
         {
             return PartialView("_Person", _personService.FindPerson(id));
         }
@@ -64,15 +65,16 @@ namespace AssimentMVSData.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([Bind("Id, Name, Phone, City")] Person person)
+        public IActionResult Edit(Person person)
         {
 
             if (ModelState.IsValid)
             {
                 _personService.UpdatePerson(person);
-                return RedirectToAction(nameof(Index));
+                return PartialView("_Edit", person);
+                
             }
-            return PartialView("_Edit", person);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

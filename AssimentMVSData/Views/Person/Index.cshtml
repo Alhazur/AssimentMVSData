@@ -5,20 +5,21 @@
 
 <h1>Person List</h1>
 
-<form asp-controller="Person" asp-action="Index" method="post">
+<div asp-controller="Person" asp-action="Index" method="post">
     <input type="text" name="name" value="" placeholder="Name" />
     <input type="tel" name="phone" value="" placeholder="Telephone" />
     <input type="text" name="city" value="" placeholder="City" />
     <input type="submit" value="Create" />
 
-</form>
+</div>
 <div>
     <ul>
         @foreach (var item in Model)
         {
             @await Html.PartialAsync("_Person", item)
-            @await Html.PartialAsync("_Edit", item)
+            @*@await Html.PartialAsync("_DelPerson", item)*@
         }
 
     </ul>
-</div
+</div>
+

@@ -24,9 +24,6 @@
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index">1</a>
-                    </li>
-                    <li class="nav-item">
                         <a asp-controller="Person" asp-action="Index">Person list</a>
                     </li>
                 </ul>
@@ -37,27 +34,32 @@
 
     </header>
 
-
-
     <div>
         @RenderBody()
     </div>
     <div>
-        <a id="aUpdate" asp-controller="Person" asp-action="Person" asp-route-id="0" data-target="environment-container"> Update</a>
-        <div id="environment-container"></div> @*ajax smotret data-target*@
-    </div>
-    <footer>
-        <p>Made by: Alhazur &copy; @DateTime.Now.ToString("yyyy")</p>
-    </footer>
-    <script>
-    //Jquery
-        $("#aUpdate").click(function (e) {
-            e.preventDefault();
-            var _this = $(this);
-            $.get(_this.attr("href"), function (res) {
-                $('#' + _this.data("target")).html(res);
+        @*<a id="aUpdate" asp-controller="Person" asp-action="Person" asp-route-id="0" data-target="environment-container"> Update</a>
+            <div id="environment-container"></div>*@ @*ajax smotret data-target*@
+        </div>
+        <footer>
+            <p>Made by: Alhazur &copy; @DateTime.Now.ToString("yyyy")</p>
+        </footer>
+        <script>
+            //Jquery
+            $(".aUpdate").click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+                $.get(_this.attr("href"), function (res) {
+                    $('#' + _this.data("target")).html(res);
+                });
             });
-        });
-    </script>
-</body>
+            
+            function UpdateButton (target) {
+                $.get("Person", function (res) {
+                    $('#' + target).replaceWith(res);
+                });
+            };
+
+        </script>
+    </body>
 </html>
