@@ -45,21 +45,56 @@
             <p>Made by: Alhazur &copy; @DateTime.Now.ToString("yyyy")</p>
         </footer>
         <script>
-            //Jquery
-            $(".aUpdate").click(function (e) {
-                e.preventDefault();
-                var _this = $(this);
-                $.get(_this.attr("href"), function (res) {
-                    $('#' + _this.data("target")).html(res);
-                });
-            });
-            
-            function UpdateButton (target) {
-                $.get("Person", function (res) {
-                    $('#' + target).replaceWith(res);
-                });
-            };
+            ////Jquery
+            //$(".aUpdate").click(function (e) {
+            //    e.preventDefault();
+            //    var _this = $(this);
+            //    $.get(_this.attr("href"), function (res) {
+            //        $('#' + _this.data("target")).html(res);
+            //    });
+            //});
 
+            //function UpdateButton (target) {
+            //    $.get("", function (res) {
+            //        $('#' + target).replaceWith(res);
+            //    });
+            //};
+
+            function LinkUpdate(urlPath, targetUpdate) {
+                console.log('Link Url: ' + urlPath);
+                console.log('Id Target: ' + targetUpdate);
+
+                $.get(urlPath, function (res) {
+                    $('#' + targetUpdate).replaceWith(res);
+                });
+            }
+
+            function LinkEdit(urlPath, targetUpdate, personId) {
+                console.log('Edit Url: ' + urlPath);
+                $.post(urlPath,
+                    {
+                        Id: personId,
+                        Name: $('#' + targetUpdate + 'Name').val(),
+                        City: $('#' + targetUpdate + 'City').val(),
+                        Phone: $('#' + targetUpdate + 'Phone').val()
+                    },
+                    function (res) {
+                        $('#' + targetUpdate).replaceWith(res);
+                    });
+            }
+
+            function LinkCreate(urlPath) {
+                console.log('Create Url: ' + urlPath);
+                $.post(urlPath,
+                    {
+                        name: $('#createName').val(),
+                        city: $('#createCity').val(),
+                        phone: $('#createPhone').val()
+                    },
+                    function (res) {
+                        $('#AllPersons').append(res);
+                    });
+            }
         </script>
     </body>
 </html>

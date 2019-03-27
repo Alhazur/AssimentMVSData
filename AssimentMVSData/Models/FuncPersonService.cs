@@ -13,6 +13,7 @@ namespace AssimentMVSData.Models
         public FuncPersonService()
         {
             persons.Add(new Person() { Name = "Max", Phone = 0729998877, City = "London" });
+            persons.Add(new Person() { Name = "Lax", Phone = 0729998866, City = "Bondon" });
         }
 
         public List<Person> AllPersons()

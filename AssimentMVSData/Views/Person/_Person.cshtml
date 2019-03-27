@@ -1,8 +1,15 @@
 ﻿@model Person
 
+
+
 <li id="@("person" + Model.Id)">
+
     <a>ID: @Model.Id  Name: @Model.Name   Telefon: @Model.Phone  City: @Model.City</a>
-    <a class="aUpdate" asp-controller="Person" asp-action="Edit" asp-route-id="@Model.Id" data-target="@("person" + Model.Id)">Edit</a>
-    <a class="aUpdate" asp-controller="Person" asp-action="DelPerson" asp-route-id="@Model.Id"  data-target="@("person" + Model.Id)" >Delete</a>
+
+    <a onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)' , @Model.Id)">Edit</a>
+    <a class="aUpdate" asp-controller="Person" asp-action="DelPerson" asp-route-id="@Model.Id" data-target="@("person" + Model.Id)">Delete</a>
 </li>
 
+
+@*onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)')"
+onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)' , @Model.Id)"*@
