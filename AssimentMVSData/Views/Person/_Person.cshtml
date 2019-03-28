@@ -1,15 +1,23 @@
 ﻿@model Person
 
-
-
-<li id="@("person" + Model.Id)">
-
-    <a>ID: @Model.Id  Name: @Model.Name   Telefon: @Model.Phone  City: @Model.City</a>
-
-    <a onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)' , @Model.Id)">Edit</a>
-    <a class="aUpdate" asp-controller="Person" asp-action="DelPerson" asp-route-id="@Model.Id" data-target="@("person" + Model.Id)">Delete</a>
-</li>
-
-
-@*onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)')"
-onclick="LinkEdit('@Url.Action("Edit", "Person")/@Model.Id' , '@("person" + Model.Id)' , @Model.Id)"*@
+<div id="@("person" + Model.Id)" class="col-12 listrow">
+    <div class="row">
+        <div class="col">@Model.Name</div>
+        <div class="col">@Model.City</div>
+        <div class="col">@Model.Phone</div>
+        <div class="col">
+            <div class="row">
+                <div class="col">                              @* get                  get *@
+                    <button class="btn btn-warning" onclick="LinkUpdate('@Url.Action("Edit", "Person", new {id = Model.Id })' , '@("person" + Model.Id)')">
+                        Edit
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" onclick="LinkUpdate('@Url.Action("DelPerson", "Person", new { id = Model.Id })' , '@("person" + Model.Id)')">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

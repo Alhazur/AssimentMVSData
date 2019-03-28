@@ -1,25 +1,37 @@
-﻿@model List<Person>
+﻿@model AssimentMVSData.Models.PersonViewModel
 @{
     ViewData["Title"] = "Person Index";
 }
 
 <h1>Person List</h1>
 
-<div asp-controller="Person" asp-action="Index" method="post">
-    <input type="text" name="name" value="" placeholder="Name" />
-    <input type="text" name="city" value="" placeholder="City" />
-    <input type="tel" name="phone" value="" placeholder="Telephone" />
-    <input type="submit" value="Create" />
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col">Name:<input type="text" id="createName" name="name"></div>
+            <div class="col">City:<input type="text" id="createCity" name="city"></div>
+            <div class="col">Phone:<input type="text" id="createPhone" name="phone"></div>
+            <div class="col">
+                <button class="btn btn-success" onclick="LinkCreate('@Url.Action("CreatePerson", "Person")')">
+                    Create Person
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col"><b>Name</b></div>
+    <div class="col"><b>City</b></div>
+    <div class="col"><b>Telefon</b></div>
+</div>
+<hr />
+<div id="AllPersons">
+    @foreach (var item in Model.persons)
+    {
+        @await Html.PartialAsync("_Person", item)
+    }
 
 </div>
-<div>
-    <ul>
-        @foreach (var item in Model)
-        {
-            @await Html.PartialAsync("_Person", item)
-            @*@await Html.PartialAsync("_DelPerson", item)*@
-        }
 
-    </ul>
-</div>
 

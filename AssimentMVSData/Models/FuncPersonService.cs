@@ -7,44 +7,44 @@ namespace AssimentMVSData.Models
 {
     public class FuncPersonService : IPesronService
     {
-        private List<Person> persons = new List<Person>();
+        PersonViewModel personViewModel = new PersonViewModel();
+
         private int idCount = 1;
 
         public FuncPersonService()
         {
-            persons.Add(new Person() { Name = "Max", Phone = 0729998877, City = "London" });
-            persons.Add(new Person() { Name = "Lax", Phone = 0729998866, City = "Bondon" });
+            CreatePerson("Max",  "London",  0729998877 );
         }
 
         public List<Person> AllPersons()
         {
-            return persons;
+            return personViewModel.persons;
         }
 
-        public Person CreatePerson(string name, int phone, string city)
+        public Person CreatePerson(string name,string city ,int phone )
         {
-            Person person = new Person() { Id = idCount, Name = name, Phone = phone, City = city };
+            Person person = new Person() { Id = idCount, Name = name, City = city, Phone = phone };
             idCount++;
-            persons.Add(person);
+            personViewModel.persons.Add(person);
             return person;
         }
 
         public List<Person> DeletePerson(int id)//för ta bort måste sktiva list istället annat namn
         {
-            foreach (Person item in persons)
+            foreach (Person item in personViewModel.persons)
             {
                 if (item.Id == id)
                 {
-                    persons.Remove(item);
+                    personViewModel.persons.Remove(item);
                     break;
                 }
             }
-            return persons;
+            return personViewModel.persons;
         }
 
         public Person FindPerson(int id)
         {
-            foreach (Person item in persons)
+            foreach (Person item in personViewModel.persons)
             {
                 if (item.Id == id)
                 {
@@ -56,13 +56,13 @@ namespace AssimentMVSData.Models
 
         public bool UpdatePerson(Person person)//måste finnas update method att byta namn
         {
-            foreach (Person item in persons)
+            foreach (Person item in personViewModel.persons)
             {
                 if (item.Id == person.Id)
                 {
                     item.Name = person.Name;
-                    item.Phone = person.Phone;
                     item.City = person.City;
+                    item.Phone = person.Phone;
                     return true;
                 }
             }

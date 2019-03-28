@@ -1,28 +1,29 @@
 ﻿@model Person
 
 
-<div class="row">
-    <div class="col-md-4">
-        <div id="@("person" + Model.Id)" asp-action="Edit" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <button class="btn btn-success" onclick="LinkUpdate(@Url.Action("Edit","Person"), @("person" + Model.Id))">Save</button>
-            <button class="btn btn-secondary" onclick="LinkUpdate('@Url.Action("Person","Person"), @("person" + Model.Id)')">Back</button>
-        </div>
-    </div>
+<div id="@("person" + Model.Id)" class="col-12">
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd><input type="text" id="@("person" + Model.Id + "Name")" value="@Model.Name"></dd>
+        <dt>City</dt>
+        <dd><input type="text" id="@("person" + Model.Id + "City")" value="@Model.City"></dd>
+        <dt>Phone</dt>
+        <dd><input type="text" id="@("person" + Model.Id + "Phone")" value="@Model.Phone "></dd>
+        <dt>
+                                                         @* post                 post *@
+                <button class="btn btn-success" onclick="LinkEdit('@Url.Action("Edit", "Person")' , '@("person" + Model.Id)')">
+                    Save
+                </button>
+            </dt>
+        <dd>
+            <button class="btn btn-secondary" onclick="LinkUpdate('@Url.Action("Person", "Person")' , '@("person" + Model.Id)')">
+                Back
+            </button>
+        </dd>
+    </dl>
 </div>
+
+@*  , '@Model.Id' *@
+@*@Model.Name*@
+@*@Model.City
+@Model.Phone*@ 

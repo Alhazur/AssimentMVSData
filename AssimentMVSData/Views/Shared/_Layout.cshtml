@@ -59,7 +59,7 @@
             //        $('#' + target).replaceWith(res);
             //    });
             //};
-
+            //Get
             function LinkUpdate(urlPath, targetUpdate) {
                 console.log('Link Url: ' + urlPath);
                 console.log('Id Target: ' + targetUpdate);
@@ -68,7 +68,7 @@
                     $('#' + targetUpdate).replaceWith(res);
                 });
             }
-
+            //Post
             function LinkEdit(urlPath, targetUpdate, personId) {
                 console.log('Edit Url: ' + urlPath);
                 $.post(urlPath,

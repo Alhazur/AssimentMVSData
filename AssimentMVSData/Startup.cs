@@ -27,7 +27,16 @@ namespace AssimentMVSData
             }
 
             app.UseStaticFiles();
+
             app.UseMvcWithDefaultRoute();
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("PersonSpecial", "PersonList",
+            //        defaults: new { controller = "Person", action = "CreatePerson" });
+
+            //    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            //});
 
             //app.Run(async (context) =>
             //{

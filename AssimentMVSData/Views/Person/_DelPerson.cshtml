@@ -1,6 +1,8 @@
 ﻿@model Person
 
-<form action="@Url.Action("DelPerson","Person")" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="submit" class="btn btn-danger" name="Id" value="Delete" />
-</form>
+<div id="@("person" + Model.Id)">
+    <form  method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="submit" onclick="@Url.Action("DelPerson","Person")" class="btn btn-danger" name="Id" value="Delete" />
+    </form>
+</div>

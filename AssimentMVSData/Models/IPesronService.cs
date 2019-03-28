@@ -7,7 +7,7 @@ namespace AssimentMVSData.Models
 {
     public interface IPesronService
     {
-        Person CreatePerson(string name, int phone, string city);
+        Person CreatePerson(string name, string city , int phone);
 
         List<Person> AllPersons();
 

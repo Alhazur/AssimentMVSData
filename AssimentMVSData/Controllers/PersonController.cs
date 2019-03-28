@@ -9,6 +9,8 @@ namespace AssimentMVSData.Controllers
 {
     public class PersonController : Controller
     {
+        PersonViewModel personViewModel = new PersonViewModel();
+
         IPesronService _personService;
 
         public PersonController(IPesronService personService)
@@ -18,17 +20,23 @@ namespace AssimentMVSData.Controllers
 
         public IActionResult Index()
         {
-            return View(_personService.AllPersons());
+            personViewModel.persons = _personService.AllPersons();
+
+            return View(personViewModel);
         }
 
         [HttpPost]
-        public IActionResult Index(string name, int phone, string city)
+        public IActionResult CreatePerson(Person person)
         {
+            if (ModelState.IsValid)
+            {
+                //doljen pokazat odnogo cheloveka potomychto partielview
+                _personService.CreatePerson(person.Name, person.City, person.Phone);
 
-            _personService.CreatePerson(name, phone, city);
+                return PartialView("_Person", person);//doljen pokazat odnogo cheloveka potomychto partielview
+            }
 
-
-            return View(_personService.AllPersons());
+            return View(person);
         }
 
         [HttpGet]
@@ -44,19 +52,25 @@ namespace AssimentMVSData.Controllers
             //return RedirectToAction("Index");
         }
 
-        public IActionResult Person(int id)
+        public IActionResult Person(Person person)
         {
-            return PartialView("_Person", _personService.FindPerson(id));
+            if (ModelState.IsValid)
+            {
+            var item = _personService.FindPerson((int)person.Id);
+
+            return PartialView("_Person", item);
+            }
+            return View(person);
         }
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(Person person)
         {
-            if (id == null)
+            if (person.Id == null)
             {
                 return NotFound();
             }
 
-            var person = _personService.FindPerson((int)id);
+            var item = _personService.FindPerson((int)person.Id);
             if (person == null)
             {
                 return NotFound();
@@ -64,15 +78,15 @@ namespace AssimentMVSData.Controllers
             return PartialView("_Edit", person);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Person person)
+        [HttpPost, ActionName("Edit")]
+        public IActionResult EditComplete(Person person)
         {
 
             if (ModelState.IsValid)
             {
                 _personService.UpdatePerson(person);
                 return PartialView("_Edit", person);
-                
+
             }
             return RedirectToAction(nameof(Index));
         }
