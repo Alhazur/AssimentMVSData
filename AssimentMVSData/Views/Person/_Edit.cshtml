@@ -11,7 +11,7 @@
         <dd><input type="text" id="@("person" + Model.Id + "Phone")" value="@Model.Phone "></dd>
         <dt>
                                                          @* post                 post *@
-                <button class="btn btn-success" onclick="LinkEdit('@Url.Action("Edit", "Person")' , '@("person" + Model.Id)')">
+                <button class="btn btn-success" onclick="LinkEdit('@Url.Action("Edit", "Person")' , '@("person" + Model.Id)' , '@Model.Id')">
                     Save
                 </button>
             </dt>
