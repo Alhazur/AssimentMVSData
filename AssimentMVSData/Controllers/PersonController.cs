@@ -11,7 +11,7 @@ namespace AssimentMVSData.Controllers
     {
         PersonViewModel personViewModel = new PersonViewModel();
 
-        IPesronService _personService;
+        IPesronService _personService;//interface to indjection
 
         public PersonController(IPesronService personService)
         {
@@ -30,10 +30,10 @@ namespace AssimentMVSData.Controllers
         {
             if (ModelState.IsValid)
             {
-                //doljen pokazat odnogo cheloveka potomychto partielview
-                _personService.CreatePerson(person.Name, person.City, person.Phone);
+                //måste visa ett person eftersom partial
+                person = _personService.CreatePerson(person.Name, person.City, person.Phone);
 
-                return PartialView("_Person", person);//doljen pokazat odnogo cheloveka potomychto partielview
+                return PartialView("_Person", person);//måste visa ett person eftersom partial
             }
 
             return View(person);
@@ -47,20 +47,20 @@ namespace AssimentMVSData.Controllers
                 _personService.DeletePerson((int)id);
             }
 
-            return Content("");
+            return Content("");//bara rensa person o inget mer
             //return View("Index",_personService.AllPersons());
             //return RedirectToAction("Index");
         }
 
         public IActionResult Person(Person person)
         {
-            if (ModelState.IsValid)
-            {
             var item = _personService.FindPerson((int)person.Id);
+            if (item != null)
+            {
 
-            return PartialView("_Person", item);
+                return PartialView("_Person", item);
             }
-            return View(person);
+            return NotFound();
         }
         [HttpGet]
         public IActionResult Edit(Person person)
@@ -69,13 +69,12 @@ namespace AssimentMVSData.Controllers
             {
                 return NotFound();
             }
-
-            var item = _personService.FindPerson((int)person.Id);
+            var item = _personService.FindPerson((int)person.Id);//cför att byta namn måste method hitta person
             if (person == null)
             {
                 return NotFound();
             }
-            return PartialView("_Edit", person);
+            return PartialView("_Edit", item);
         }
 
         [HttpPost, ActionName("Edit")]
@@ -85,10 +84,23 @@ namespace AssimentMVSData.Controllers
             if (ModelState.IsValid)
             {
                 _personService.UpdatePerson(person);
-                return PartialView("_Edit", person);
+                return PartialView("_Person", person);
 
             }
-            return RedirectToAction(nameof(Index));
+            return PartialView("_Edit", person);//om engenting är ändrat måste stanna i Edit
+        }
+
+        public IActionResult Filter(string filter)
+        {
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                return PartialView("_List", _personService.AllPersons());
+
+            }
+            filter = filter.ToLower();
+            var vm = new PersonViewModel();//måste kalla model 
+            vm.persons = _personService.AllPersons().Where(p => p.Name.ToLower().Contains(filter) || p.City.ToLower().Contains(filter)).ToList();//tolist det är convert
+            return PartialView("_List", vm);
         }
     }
 }

@@ -45,24 +45,9 @@
             <p>Made by: Alhazur &copy; @DateTime.Now.ToString("yyyy")</p>
         </footer>
         <script>
-            ////Jquery
-            //$(".aUpdate").click(function (e) {
-            //    e.preventDefault();
-            //    var _this = $(this);
-            //    $.get(_this.attr("href"), function (res) {
-            //        $('#' + _this.data("target")).html(res);
-            //    });
-            //});
-
-            //function UpdateButton (target) {
-            //    $.get("", function (res) {
-            //        $('#' + target).replaceWith(res);
-            //    });
-            //};
-
             //Get
             function LinkUpdate(urlPath, targetUpdate) {
-                console.log('Link Url: ' + urlPath);
+                console.log('LinkUpdate Url: ' + urlPath);
                 console.log('Id Target: ' + targetUpdate);
 
                 $.get(urlPath, function (res) {
@@ -71,7 +56,7 @@
             }
             //Post
             function LinkEdit(urlPath, targetUpdate, personId) {
-                console.log('Edit Url: ' + urlPath);
+                console.log('LinkEdit Url: ' + urlPath);
                 $.post(urlPath,
                     {
                         Id: personId,
@@ -85,7 +70,7 @@
             }
 
             function LinkCreate(urlPath) {
-                console.log('Create Url: ' + urlPath);
+                console.log('LinkCreate Url: ' + urlPath);
                 $.post(urlPath,
                     {
                         name: $('#createName').val(),
@@ -94,6 +79,16 @@
                     },
                     function (res) {
                         $('#AllPersons').append(res);
+                    });
+            }
+            function LinkFilter(urlPath) {
+                console.log('LinkCreate Url: ' + urlPath);
+                $.post(urlPath,
+                    {
+                        filter: $('#filterlist').val(),//skappar nya list som ska sökas
+                    },
+                    function (res) {
+                        $('#AllPersons').html(res);
                     });
             }
         </script>

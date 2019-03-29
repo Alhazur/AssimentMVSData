@@ -14,6 +14,7 @@ namespace AssimentMVSData.Models
         public FuncPersonService()
         {
             CreatePerson("Max",  "London",  0729998877 );
+            CreatePerson("Lax", "Bondon", 0729998877);
         }
 
         public List<Person> AllPersons()

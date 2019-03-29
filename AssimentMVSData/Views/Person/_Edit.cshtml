@@ -10,20 +10,16 @@
         <dt>Phone</dt>
         <dd><input type="text" id="@("person" + Model.Id + "Phone")" value="@Model.Phone "></dd>
         <dt>
-                                                         @* post                 post *@
-                <button class="btn btn-success" onclick="LinkEdit('@Url.Action("Edit", "Person")' , '@("person" + Model.Id)' , '@Model.Id')">
-                    Save
-                </button>
-            </dt>
+                                                    @* post                 post *@
+            <button class="btn btn-success" onclick="LinkEdit('@Url.Action("Edit", "Person")' , '@("person" + Model.Id)' , '@Model.Id')">
+                Save
+            </button>
+        </dt>
         <dd>
-            <button class="btn btn-secondary" onclick="LinkUpdate('@Url.Action("Person", "Person")' , '@("person" + Model.Id)')">
+                                                                            @* iaction   controller          id*@
+            <button class="btn btn-secondary" onclick="LinkUpdate('@Url.Action("Person", "Person", new { id = Model.Id })' , '@("person" + Model.Id)')">
                 Back
             </button>
         </dd>
     </dl>
 </div>
-
-@*  , '@Model.Id' *@
-@*@Model.Name*@
-@*@Model.City
-@Model.Phone*@ 
