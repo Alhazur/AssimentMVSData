@@ -36,7 +36,7 @@ namespace AssimentMVSData.Controllers
                 return PartialView("_Person", person);//måste visa ett person eftersom partial
             }
 
-            return View(person);
+            return BadRequest();//det betyder lägg inget till
         }
 
         [HttpGet]
@@ -97,10 +97,14 @@ namespace AssimentMVSData.Controllers
                 return PartialView("_List", _personService.AllPersons());
 
             }
-            filter = filter.ToLower();
-            var vm = new PersonViewModel();//måste kalla model 
-            vm.persons = _personService.AllPersons().Where(p => p.Name.ToLower().Contains(filter) || p.City.ToLower().Contains(filter)).ToList();//tolist det är convert
-            return PartialView("_List", vm);
+            else
+            {
+
+                filter = filter.ToLower();
+                var vm = new PersonViewModel();//måste kalla model 
+                vm.persons = _personService.AllPersons().Where(p => p.Name.ToLower().Contains(filter) || p.City.ToLower().Contains(filter)).ToList();//tolist det är convert
+                return PartialView("_List", vm);
+            }
         }
     }
 }
